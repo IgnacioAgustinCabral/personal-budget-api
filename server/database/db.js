@@ -8,9 +8,7 @@ const connectionString =
 
 const pool = new Pool({
     connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
-    ssl: {
-      rejectUnauthorized: false,
-    }
+    ssl: process.env.DATABASE_URL ? true : false
   });
 
 module.exports= pool;
