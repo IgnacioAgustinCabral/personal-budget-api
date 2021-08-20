@@ -18,10 +18,13 @@ const getEnvelopeById = async (req, res) => {
     const result = await pool.query("SELECT * FROM envelopes WHERE id=$1", [
       id,
     ]);
-    res.status(200).json(result.rows);
+    if (result.rowCount !== 0) {
+      res.status(200).json(result.rows);
+    } else {
+      res.status(404).json(`Envelope with id ${id} not found`);
+    }
   } catch (err) {
     console.error(err.message);
-    res.status(404).json(`Envelope with id ${id} not found`);
   }
 };
 //POST NEW ENVELOPE

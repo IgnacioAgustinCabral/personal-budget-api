@@ -3,7 +3,7 @@ CREATE DATABASE personal_budget;
 
 CREATE TABLE categories(
     id SERIAL PRIMARY KEY,
-    description VARCHAR(40) NOT NULL        
+    description VARCHAR(40) UNIQUE NOT NULL        
 );
 
 CREATE TABLE envelopes(

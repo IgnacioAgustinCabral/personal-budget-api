@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('./envelopes.js');
+const db = require('../envelopes.js');
 const envelopeRouter = express.Router();
 
 
