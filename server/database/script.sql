@@ -1,14 +1,22 @@
 CREATE DATABASE personal_budget;
 
-
+CREATE TABLE user(
+    id SERIAL PRIMARY KEY,
+    username TEXT NOT NULL,
+    email TEXT NOT NULL,
+    password TEXT NOT NULL,
+    UNIQUE (username,email)
+);
 CREATE TABLE categories(
     id SERIAL PRIMARY KEY,
-    description VARCHAR(40) UNIQUE NOT NULL        
+    description VARCHAR(40) NOT NULL,
+    UNIQUE (description)        
 );
 
 CREATE TABLE envelopes(
     id SERIAL PRIMARY KEY,
-    category_id INT UNIQUE REFERENCES categories(id) NOT NULL,
+    category_id INT REFERENCES categories(id) NOT NULL,
+    user_id INT REFERENCES user(id) NOT NULL, 
     amount FLOAT (2) NOT NULL
 );
 
