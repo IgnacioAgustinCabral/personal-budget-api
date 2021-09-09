@@ -36,7 +36,7 @@ app.use(
   })
 );
 
-sessionStore.sync();
+// sessionStore.sync();
 
 const PORT = process.env.PORT;
 
