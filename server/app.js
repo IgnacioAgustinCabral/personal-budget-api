@@ -21,7 +21,6 @@ app.use(express.json());
 
 const sessionStore = new SequelizeStore({
   db: db,
-  checkExpirationInterval: 15 * 60 * 1000,
   expiration: 24 * 60 * 60 * 60 * 1000,
 });
 
