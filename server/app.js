@@ -21,6 +21,7 @@ app.use(express.json());
 
 const sessionStore = new SequelizeStore({
   db: db,
+  tableName:"sessions",
   expiration: 24 * 60 * 60 * 60 * 1000,
 });
 
@@ -35,7 +36,7 @@ app.use(
   })
 );
 
-// sessionStore.sync();
+sessionStore.sync();
 
 const PORT = process.env.PORT;
 
