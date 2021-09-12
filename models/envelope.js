@@ -7,24 +7,28 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Envelope }) {
+    static associate(models) {
       // define association here
-      this.hasMany(Category, {
+      Envelope.belongsTo(models.Category, {
         foreignKey: 'category_id',
         as: 'categories',
       });
-      this.hasMany(User, {
+      Envelope.belongsTo(models.User, {
         foreignKey: 'user_id',
         as: 'users',
       });
     }
 
-    toJSON() {
-      return { ...this.get(), id: undefined };
-    }
+    // toJSON() {
+    //   return { ...Envelope.get(), id: undefined };
+    // }
   }
   Envelope.init(
     {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+      },
       category_id: DataTypes.INTEGER,
       user_id: DataTypes.INTEGER,
       amount: DataTypes.FLOAT,
@@ -33,6 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       tableName: 'envelopes',
       modelName: 'Envelope',
+      timestamps:true
     }
   );
   return Envelope;

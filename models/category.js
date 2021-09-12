@@ -7,20 +7,19 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Category }) {
+    static associate(models) {
       // define association here
-      this.hasMany(Category, {
+      Category.hasMany(models.Envelope, {
         foreignKey: 'category_id',
-        as: 'Categories',
+        as: 'categories',
       });
     }
 
-    toJSON() {
-      return { ...this.get(), id: undefined };
-    }
+    // toJSON() {
+    //   return { ...Category.get(), id: undefined };
+    // }
   }
-  Category.init(
-    {
+  Category.init({
       uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -31,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       tableName: 'categories',
       modelName: 'Category',
+      timestamps:true
     }
   );
   return Category;
