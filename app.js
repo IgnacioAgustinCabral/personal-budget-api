@@ -1,5 +1,7 @@
 const express = require('express');
 require('dotenv').config();
+const path = require('path');
+const exphbs = require('express-handlebars');
 const app = express();
 const cors = require('cors');
 const session = require('express-session');
@@ -7,8 +9,6 @@ const UserRouter = require('./routers/UserRouter');
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-// const enveloperRouter = require('./routers/envelope_router');
-// const categoryRouter = require('./routers/categories_router');
 const db = require('./database/db.config');
 
 app.use(cors());
@@ -22,6 +22,19 @@ const sessionStore = new SequelizeStore({
   tableName: 'sessions',
   expiration: 24 * 60 * 60 * 60 * 1000,
 });
+
+//HANDLEBARS SETTINGS
+app.set('views', path.join(__dirname, 'views'));
+app.engine(
+  '.hbs',
+  exphbs({
+    defaultLayout: 'main',
+    layoutsDir: path.join(app.get('views'), 'layouts'),
+    //partialsDir: path.join(app.get("views"), "partials"),
+    extname: '.hbs',
+  })
+);
+app.set('view engine', '.hbs');
 
 app.use(
   session({
@@ -43,17 +56,19 @@ db.authenticate()
   .catch((err) => console.log(`Error ${err}`));
 
 //prueba
+// app.get('/', (req, res) => {
+//   if (req.session.viewCount) {
+//     req.session.viewCount++;
+//   } else {
+//     req.session.viewCount = 1;
+//   }
+//   res
+//     .status(200)
+//     .send('<h1>HELLO you have visited</h1>' + req.session.viewCount);
+// });
 app.get('/', (req, res) => {
-  if (req.session.viewCount) {
-    req.session.viewCount++;
-  } else {
-    req.session.viewCount = 1;
-  }
-  res
-    .status(200)
-    .send('<h1>HELLO you have visited</h1>' + req.session.viewCount);
+  res.render('prueba');
 });
-
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

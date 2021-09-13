@@ -4,8 +4,8 @@
   "description": "personal budget",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon ./server/app.js",
-    "start": "node ./server/app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
