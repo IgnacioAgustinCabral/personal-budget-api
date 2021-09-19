@@ -5,8 +5,7 @@ const User = model.User;
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
-    res.render('prueba');
-    //res.status(200).json(users);
+    res.status(200).json(users);
   } catch (err) {
     console.log(err);
     return res.status(401).json({ error: err.message });
@@ -28,7 +27,12 @@ const insertUser = async (req, res) => {
   }
 };
 
+const userRegister = (req, res) => {
+  res.render('users/register');
+};
+
 module.exports = {
   getAllUsers,
   insertUser,
+  userRegister,
 };

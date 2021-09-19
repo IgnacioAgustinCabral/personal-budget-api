@@ -14,7 +14,7 @@ const db = require('./database/db.config');
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/api/users', UserRouter);
+app.use('/users', UserRouter);
 // app.use('/api/category', categoryRouter);
 
 const sessionStore = new SequelizeStore({
@@ -66,9 +66,8 @@ db.authenticate()
 //     .status(200)
 //     .send('<h1>HELLO you have visited</h1>' + req.session.viewCount);
 // });
-app.get('/', (req, res) => {
-  res.render('prueba');
-});
+
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
