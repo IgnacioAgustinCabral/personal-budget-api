@@ -6,6 +6,7 @@ const app = express();
 const cors = require('cors');
 const session = require('express-session');
 const UserRouter = require('./routers/UserRouter');
+const IndexRouter = require('./routers/IndexRouter');
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -14,8 +15,12 @@ const db = require('./database/db.config');
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+/**
+ * ROUTERS
+ */
 app.use('/users', UserRouter);
-// app.use('/api/category', categoryRouter);
+app.use('/',IndexRouter);
 
 const sessionStore = new SequelizeStore({
   db: db,

@@ -31,8 +31,13 @@ const userRegister = (req, res) => {
   res.render('users/register');
 };
 
+const userLogin = (req, res) => {
+  res.render('users/login');
+};
+
 module.exports = {
   getAllUsers,
   insertUser,
   userRegister,
+  userLogin
 };
