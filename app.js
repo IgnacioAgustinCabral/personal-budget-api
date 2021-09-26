@@ -35,7 +35,7 @@ app.engine(
   exphbs({
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'), 'layouts'),
-    //partialsDir: path.join(app.get("views"), "partials"),
+    partialsDir: path.join(app.get("views"), "partials"),
     extname: '.hbs',
   })
 );
@@ -71,7 +71,9 @@ db.authenticate()
 //     .status(200)
 //     .send('<h1>HELLO you have visited</h1>' + req.session.viewCount);
 // });
+///PARA QUE FUNCIONE EL CSS
 
+app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
